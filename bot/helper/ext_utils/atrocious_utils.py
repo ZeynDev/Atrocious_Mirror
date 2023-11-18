@@ -57,7 +57,7 @@ async def copy_message(chat_id, from_chat_id, message_id):
 
 async def get_bot_pm_button():
     buttons = ButtonMaker()
-    buttons.ubutton("View in inbox", f"https://t.me/{bot_name}")
+    buttons.ubutton("Lihat di PM", f"https://t.me/{bot_name}")
     button = buttons.build_menu(1)
     return button
 
@@ -98,13 +98,13 @@ async def stop_duplicate_check(name, listener):
         telegraph_content, contents_no = await sync_to_async(gdSearch(stopDup=True).drive_list, name, listener.upDest, listener.user_id)
         if telegraph_content:
             if config_dict['BOT_PM'] and message.chat.type != message.chat.type.PRIVATE:
-                msg = f"File/Folder is already available in Drive.\nI have sent available file link in pm."
-                pmmsg = f"Hey {tag}.\n\nFile/Folder is already available in Drive.\n\nHere are {contents_no} list results:"
+                msg = f"File/Folder sudah ada di Drive.\nSaya telah mengirim file link di pm."
+                pmmsg = f"Hai.. {tag}.\n\nFile/Folder sudah ada di Drive.\n\nBerikut adalah {contents_no} Hasil yang ditemukan:"
                 pmbutton = await get_telegraph_list(telegraph_content)
                 button = await get_bot_pm_button()
                 await send_to_chat(chat_id=user_id, text=pmmsg, button=pmbutton)
             else:
-                msg = f"File/Folder is already available in Drive.\nHere are {contents_no} list results:"
+                msg = f"File/Folder sudah ada di Drive.\nBerikut adalah {contents_no} Hasil yang ditemukan:"
                 button = await get_telegraph_list(telegraph_content)
             return msg, button
     return False, None
@@ -142,10 +142,10 @@ async def stop_duplicate_leech(name, size, listener):
                     file_size = file_.file_size
                     if size == file_size:
                         if config_dict['BOT_PM'] and message.chat.type != message.chat.type.PRIVATE:
-                            msg = f"File already available in Leech Dump Chat.\nI have sent available file in pm."
+                            msg = f"File sudah ada di Leech Dump Chat.\nSaya dapat mengirimkan file di pm."
                             await bot.copy_message(chat_id=user_id, from_chat_id=from_chat_id, message_id=message_id)
                         else:
-                            msg = f"File already available in Leech Dump Chat.\nI have forwarded the file here."
+                            msg = f"File sudah ada di Leech Dump Chat.\nSaya dapat meneruskan file kesini."
                             await bot.copy_message(chat_id=message.chat.id, from_chat_id=from_chat_id, message_id=message_id)
                         return msg
     return
@@ -185,13 +185,13 @@ async def check_duplicate_file(self, up_name):
     telegraph_content, contents_no = await sync_to_async(gdSearch(stopDup=True).drive_list, up_name, self.upDest, self.user_id)
     if telegraph_content:
         if config_dict['BOT_PM'] and message.chat.type != message.chat.type.PRIVATE:
-            msg = f"\nFile/Folder is already available in Drive.\nI have sent available file link in pm."
-            pmmsg = f"Hey {self.tag}.\n\nFile/Folder is already available in Drive.\nHere are {contents_no} list results:"
+            msg = f"\nFile/Folder sudah ada di Drive.\nSaya telah mengirim file link di pm."
+            pmmsg = f"Hai... {self.tag}.\n\nFile/Folder sudah ada di Drive.\nBerikut adalah {contents_no} Hasil yang ditemukan:"
             pmbutton = await get_telegraph_list(telegraph_content)
             button = await get_bot_pm_button()
             await send_to_chat(chat_id=user_id, text=pmmsg, button=pmbutton)
         else:
-            msg = f"\nFile/Folder is already available in Drive.\nHere are {contents_no} list results:"
+            msg = f"\nFile/Folder sudah ada di Drive.\nBerikut adalah {contents_no} Hasil yang ditemukan:"
             button = await get_telegraph_list(telegraph_content)
         return msg, button
     return False, None
@@ -473,7 +473,7 @@ async def forcesub(message, ids, button=None):
     if join_button:
         if button is None:
             button = ButtonMaker()
-        _msg = "You haven't joined our channel yet!"
+        _msg = "kamu belum bergabung dengan channel tersebut!"
         for key, value in join_button.items():
             button.ubutton(f'Join {key}', value, 'footer')
     return _msg, button
@@ -487,8 +487,8 @@ async def BotPm_check(message, button=None):
     except Exception as e:
         if button is None:
             button = ButtonMaker()
-        _msg = "You didn't START the bot in PM (Private)."
-        button.ubutton("Start Bot Now", f"https://t.me/{bot_name}?start=start", 'header')
+        _msg = "Kamu tidak menekan tombol START bot di PM (Private)."
+        button.ubutton("Start Bot Sekarang", f"https://t.me/{bot_name}?start=start", 'header')
         return _msg, button
 
 
