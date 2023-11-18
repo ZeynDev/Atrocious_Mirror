@@ -137,26 +137,26 @@ def get_readable_message():
             msg += f"<b><a href='{download.message.link}'>{download.status()}</a>: </b>"
             msg += f"<code>{escape(f'{download.name()}')}</code>"
         if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING]:
-            msg += f"\n<b>{theme['Done']}:</b> {get_progress_bar_string(download.progress())} {download.progress()}"
-            msg += f"\n<b>{theme['Speed']}: </b>{download.speed()}"
-            msg += f"\n<b>{theme['Process']}: </b>{download.processed_bytes()} of {download.size()}"
-            msg += f"\n<b>{theme['ETA']}: </b>{download.eta()} <b>| Elapsed: </b>{get_readable_time(time() - download.message.date.timestamp())}"
-            msg += f"\n<b>{theme['Engine']}: </b>{download.engine}"
-            msg += f"\n<b>{theme['User']}: </b>{download.message.from_user.mention(style='html')} | <b>ID: </b><code>{download.message.from_user.id}</code>"
+            msg += f"\n<b>┌┤{theme['Done']}:</b> {get_progress_bar_string(download.progress())} {download.progress()}"
+            msg += f"\n<b>├ {theme['Speed']}: </b>{download.speed()}"
+            msg += f"\n<b>├ {theme['Process']}: </b>{download.processed_bytes()} of {download.size()}"
+            msg += f"\n<b>├ {theme['ETA']}: </b>{download.eta()} <b>| Elapsed: </b>{get_readable_time(time() - download.message.date.timestamp())}"
+            msg += f"\n<b>├ {theme['Engine']}: </b>{download.engine}"
+            msg += f"\n<b>├ {theme['User']}: </b>{download.message.from_user.mention(style='html')} | <b>ID: </b><code>{download.message.from_user.id}</code>"
             if hasattr(download, 'seeders_num'):
                 try:
-                    msg += f"\n<b>{theme['Seeders']}:</b> {download.seeders_num()} | <b>Leechers:</b> {download.leechers_num()}"
+                    msg += f"\n<b>├ {theme['Seeders']}:</b> {download.seeders_num()} | <b>Leechers:</b> {download.leechers_num()}"
                 except:
                     pass
         elif download.status() == MirrorStatus.STATUS_SEEDING:
-            msg += f"\n<b>{theme['Size']}: </b>{download.size()}"
-            msg += f"\n<b>{theme['Speed']}: </b>{download.upload_speed()}"
+            msg += f"\n<b>├ {theme['Size']}: </b>{download.size()}"
+            msg += f"\n<b>├ {theme['Speed']}: </b>{download.upload_speed()}"
             msg += f" | <b>{theme['Uploaded']}: </b>{download.uploaded_bytes()}"
-            msg += f"\n<b>{theme['Ratio']}: </b>{download.ratio()}"
+            msg += f"\n<b>├ {theme['Ratio']}: </b>{download.ratio()}"
             msg += f" | <b>{theme['Time']}: </b>{download.seeding_time()}"
         else:
-            msg += f"\n<b>{theme['Size']}: </b>{download.size()}"
-        msg += f"\n<b>{theme['Stop']} </b><code>/{BotCommands.CancelMirror} {download.gid()}</code>\n\n"
+            msg += f"\n<b>├ {theme['Size']}: </b>{download.size()}"
+        msg += f"\n<b>╰►{theme['Stop']} </b><code>/{BotCommands.CancelMirror} {download.gid()}</code>\n\n"
     if len(msg) == 0:
         return None, None
     dl_speed = 0
@@ -179,7 +179,7 @@ def get_readable_message():
     else:
         buttons.ibutton("Refresh", "status ref")
         buttons.ibutton("Statistics", str(THREE))
-        buttons.ubutton(f"Repo", f"https://github.com/SN-Abdullah-Al-Noman/Atrocious_Mirror")
+        buttons.ubutton(f"Channel", f"https://t.me/Ricloudw")
         buttons.ibutton("Close", "status close")
         button = buttons.build_menu(2)
     if config_dict['BOT_MAX_TASKS']:
